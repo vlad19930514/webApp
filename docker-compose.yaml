@@ -3,9 +3,9 @@ services:
   postgres:
     image: postgres:14-alpine
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=web_app
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: web_app
     ports:
       - '5432:5432'
     volumes:
@@ -16,7 +16,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8081:8081'
-      - '9090:9090'
     environment:
       - DB_SOURCE=postgres://root:secret@postgres:5432/web_app?sslmode=disable
     depends_on:
