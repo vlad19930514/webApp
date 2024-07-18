@@ -6,12 +6,13 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/vlad19930514/webApp/api"
+	pg "github.com/vlad19930514/webApp/internal/pkg/pg"
 	"github.com/vlad19930514/webApp/util"
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	PG "github.com/vlad19930514/webApp/db"
+
 	db "github.com/vlad19930514/webApp/db/sqlc"
 )
 
@@ -28,7 +29,7 @@ func main() {
 		log.Fatal().AnErr("cannot load config", err)
 	}
 
-	pgConnection, err := PG.NewPG(context.Background(), config.DBSource)
+	pgConnection, err := pg.Dial(context.Background(), config.DBSource)
 
 	if err != nil {
 		log.Fatal().AnErr("Error creating connection pool: %v", err)

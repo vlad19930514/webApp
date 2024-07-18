@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	PG "github.com/vlad19930514/webApp/db"
+	"github.com/vlad19930514/webApp/internal/pkg/pg"
 	"github.com/vlad19930514/webApp/util"
 )
 
@@ -18,11 +18,10 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		log.Fatal("cannot load config", err)
 	}
-	pgConnection, err := PG.NewPG(context.Background(), config.DBSource)
+	pgConnection, err := pg.Dial(context.Background(), config.DBSource)
 	if err != nil {
 		log.Fatalf("Error creating connection pool:%v", err)
 	}
-	defer pgConnection.Close()
-	testQueries = New(pgConnection.Db)
+	testQueries = New(pgConnection)
 	os.Exit(m.Run())
 }
