@@ -9,8 +9,8 @@ FROM alpine:3.19
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY app.env .
-COPY start.sh .
-COPY wait-for.sh .
+COPY cmd/web/start.sh .
+COPY cmd/web/wait-for.sh .
 COPY db/migration ./db/migration
 
 RUN chmod +x wait-for.sh start.sh

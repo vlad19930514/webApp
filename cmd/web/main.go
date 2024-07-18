@@ -37,12 +37,12 @@ func main() {
 
 	runDBMigration(config.MigrationURL, config.DBSource)
 
-	store := db.NewStore(pgConnection.Db)
+	store := db.NewStore(pgConnection.Pool) //TODO передавать pgconnection
 	server := api.NewServer(store)
 
 	err = server.Start(config.ServerAddress)
 	if err != nil {
-		log.Fatal().AnErr("Cannot start server: %v", err)
+		log.Fatal().AnErr("Cannot start server: %v", err) //TODO вынести ошибки в run
 	}
 
 }

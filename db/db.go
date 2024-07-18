@@ -10,8 +10,9 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-type postgres struct {
-	Db *pgxpool.Pool
+// TODO перенести в internal
+type postgres struct { // TODO переименовать с большой
+	*pgxpool.Pool
 }
 
 var (
@@ -21,7 +22,7 @@ var (
 
 func NewPG(ctx context.Context, connString string) (*postgres, error) {
 
-	pgOnce.Do(func() {
+	pgOnce.Do(func() { // TODO Убрать, зачем нам ограничивать конект
 		db, err := pgxpool.New(ctx, connString)
 		if err != nil {
 			err = fmt.Errorf("unable to create connection pool: %w", err)
@@ -36,13 +37,13 @@ func NewPG(ctx context.Context, connString string) (*postgres, error) {
 	return pgInstance, nil
 }
 func (pg *postgres) Ping(ctx context.Context) error {
-	if pg.Db == nil {
+	if pg.Pool == nil {
 		return errors.New("connection pool is nil")
 	}
-	return pg.Db.Ping(ctx)
+	return pg.Pool.Ping(ctx)
 }
 func (pg *postgres) Close() {
-	if pg.Db != nil {
-		pg.Db.Close()
+	if pg.Pool != nil {
+		pg.Pool.Close()
 	}
 }

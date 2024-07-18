@@ -2,7 +2,7 @@ package db
 
 import "github.com/jackc/pgx/v5/pgxpool"
 
-type Store interface {
+type Store interface { //TODO изменить на userStore
 	Querier
 }
 type SQLStore struct {

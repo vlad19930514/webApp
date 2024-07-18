@@ -1,4 +1,4 @@
-DB_URL=postgres://root:secret@localhost:5432/web_app?sslmode=disable
+.PHONY: postgres createdb nodemon migratedown migrateup sqlc test mock
 network:
 	docker network create web-network
 
@@ -26,10 +26,12 @@ dockerdown:
 dockerprune:
 	docker system prune -a --volumes
 
+dockercompose:
+	docker compose up
+
 test:
 	go test -v -cover ./...
 
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/vlad19930514/webApp/db/sqlc Store
 
-.PHONY: postgres createdb nodemon migratedown migrateup sqlc test mock
