@@ -6,6 +6,7 @@ type Config struct {
 	DBSource      string `mapstructure:"DB_SOURCE"`
 	ServerAddress string `mapstructure:"SERVER_PORT"`
 	MigrationURL  string `mapstructure:"MIGRATION_URL"`
+	DSN           string `mapstructure:"DSN"`
 }
 
 func LoadConfig(path string) (config Config, err error) {

@@ -2,61 +2,92 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/rs/zerolog"
+	"os"
+	"time"
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/vlad19930514/webApp/api"
+	"github.com/vlad19930514/webApp/internal/app/repository/pgrepo"
+	"github.com/vlad19930514/webApp/internal/app/services"
+	"github.com/vlad19930514/webApp/internal/app/transport/httpserver"
 	pg "github.com/vlad19930514/webApp/internal/pkg/pg"
 	"github.com/vlad19930514/webApp/util"
 
-	"github.com/golang-migrate/migrate/v4"
+	"errors"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-
-	db "github.com/vlad19930514/webApp/db/sqlc"
 )
 
-/* func init() {
-	// loads values from .env into the system
-	if err := godotenv.Load(); err != nil {
-		log.Print("No .env file found")
-	}
-} */
-
 func main() {
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339}).With().Caller().Logger()
+	err := runApplication()
+	if err != nil {
+		log.Fatal().Err(err)
+	}
+}
+
+func runApplication() error {
 	config, err := util.LoadConfig(".")
 	if err != nil {
-		log.Fatal().AnErr("cannot load config", err)
+		return fmt.Errorf("cannot load config: %w", err)
 	}
 
-	pgConnection, err := pg.Dial(context.Background(), config.DBSource)
+	pgDB, err := pg.Dial(context.Background(), config.DSN)
 
 	if err != nil {
-		log.Fatal().AnErr("Error creating connection pool: %v", err)
+		return fmt.Errorf("error creating connection pool: %w", err)
 	}
-	defer pgConnection.Close()
 
-	runDBMigration(config.MigrationURL, config.DBSource)
+	// create repositories
+	userRepo := pgrepo.NewUserRepo(pgDB)
 
-	store := db.NewStore(pgConnection.Pool) //TODO передавать pgconnection
-	server := api.NewServer(store)
+	// create services
+	userService := services.NewUserService(userRepo)
+	//run migration
+	err = runDBMigration(config.MigrationURL, config.DBSource)
+	if err != nil {
+		return fmt.Errorf("cannot migrate: %w", err)
+	}
+
+	server := httpserver.NewServer(userService)
 
 	err = server.Start(config.ServerAddress)
 	if err != nil {
-		log.Fatal().AnErr("Cannot start server: %v", err) //TODO вынести ошибки в run
+		return fmt.Errorf("cannot start server: %w", err)
 	}
-
+	return nil
 }
 
-func runDBMigration(migrationURL string, dbSource string) {
+func runDBMigration(migrationURL string, dbSource string) error {
+	log.Info().Str("migrationURL", migrationURL).Str("dbSource", dbSource).Msg("starting DB migration")
+
 	migration, err := migrate.New(migrationURL, dbSource)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot create new migrate instance")
+		return fmt.Errorf("cannot create new migrate instance: %w", err)
 	}
+	defer func() {
+		sourceErr, databaseErr := migration.Close()
+		if sourceErr != nil {
+			log.Error().Err(sourceErr).Msg("error closing migration source")
+		}
+		if databaseErr != nil {
+			log.Error().Err(databaseErr).Msg("error closing migration database")
+		}
 
-	if err = migration.Up(); err != nil && err != migrate.ErrNoChange {
-		log.Fatal().Err(err).Msg("failed to run migrate up")
+	}()
+
+	if err = migration.Up(); err != nil {
+		if errors.Is(err, migrate.ErrNoChange) {
+			log.Info().Msg("no change in migrations")
+
+		} else {
+			log.Fatal().Err(err).Msg("failed to run migrate up")
+		}
+	} else {
+		log.Info().Msg("db migrated successfully")
 	}
-
-	log.Info().Msg("db migrated successfully")
+	return nil
 }

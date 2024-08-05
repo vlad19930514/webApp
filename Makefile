@@ -12,10 +12,10 @@ nodemon:
 	nodemon --exec go run ./cmd/web/main.go --signal SIGTERM	
 
 migratedown:
-	migrate -path db/migration -database postgres://root:secret@localhost:5432/web_app?sslmode=disable -verbose down
+	migrate -path internal/app/migrations -database postgres://root:secret@localhost:5432/web_app?sslmode=disable -verbose down
  
 migrateup:
-	migrate -path db/migration -database postgres://root:secret@localhost:5432/web_app?sslmode=disable -verbose up
+	migrate -path internal/app/migrations -database postgres://root:secret@localhost:5432/web_app?sslmode=disable -verbose up
 
 sqlc:
 	sqlc generate

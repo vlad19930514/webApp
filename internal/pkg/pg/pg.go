@@ -4,24 +4,21 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jackc/pgx/v5/pgxpool"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type DB struct {
-	*pgxpool.Pool
+	*gorm.DB
 }
 
-func Dial(ctx context.Context, connString string) (*DB, error) {
-	db, err := pgxpool.New(ctx, connString)
+func Dial(ctx context.Context, dsn string) (*DB, error) {
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		err = fmt.Errorf("unable to create connection pool: %w", err)
 		return nil, err
 	}
-	return &DB{db}, nil
-}
 
-func (pg *DB) Close() { //TODO k нужно ли закрытие?
-	if pg.Pool != nil {
-		pg.Pool.Close()
-	}
+	return &DB{db}, nil
 }
