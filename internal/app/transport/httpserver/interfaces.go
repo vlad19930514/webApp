@@ -6,6 +6,8 @@ import (
 	"github.com/vlad19930514/webApp/internal/app/domain"
 )
 
+//go:generate mockgen -source=interfaces.go -destination=./mocks/mock_iuser_service.go -package=mocks
+
 //go:generate mockery --output=./mocks --filename=mock_userService.go --name=IUserService  --outpkg=mocks --structname=MockIUserService
 type IUserService interface {
 	CreateUser(ctx context.Context, user domain.User) (domain.User, error)
