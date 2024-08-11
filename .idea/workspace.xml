@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9ffe3f2-d357-4463-ae11-2906e63158c4" name="Changes" comment="test user handler">
+      <change afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers_test.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="9671bf5863afd00a4906abbc31a8c89083d598f7" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers.go" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers_test.go" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2jj53YpAHsKXmWTblnXwN01DwSD" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1).executor": "Run",
+    "Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
+    "Go Test.TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
+    "Go Test.TestRun in github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
+    "Go Test.go test github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
+    "Go Test.go test github.com/vlad19930514/webApp/util.executor": "Run",
+    "Makefile Target.migratedown.executor": "Run",
+    "Makefile Target.network.executor": "Run",
+    "Makefile Target.nodemon.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/vladislavmoskalenko/Desktop/backend/go/respApp/internal/app/transport/httpserver",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "typescript.add.unambiguous.imports.on.the.fly": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/app/transport/httpserver" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/app/transport/httpserver/mockery" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)">
+    <configuration name="TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="respApp" />
+      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <parameters value=" -testify.m ^TestCreateUser$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestUserTestSuite\E$/^\QTestCreateUser\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="respApp" />
+      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestCreateUser\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="respApp" />
+      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestCreateUser\E$/^\Qsuccessful_create_user\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestRun in github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="respApp" />
+      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestRun\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="respApp" />
+      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestRun in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+        <item itemvalue="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)" />
+        <item itemvalue="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+        <item itemvalue="Go Test.TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+        <item itemvalue="Go Test.go test github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-33c477a475b1-e0158606a674-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.18034.61" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-GO-241.18034.61" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="complete rest" />
+    <MESSAGE value="test user handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="test user handler" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
