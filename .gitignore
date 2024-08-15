@@ -1,0 +1,8 @@
+build/
+.idea
+.idea/
+/pkg/services/indoor/py/venv/
+vendor/
+bin/
+tests/
+tmp/

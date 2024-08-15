@@ -2,21 +2,22 @@ package httpserver
 
 import (
 	"fmt"
+	"github.com/google/uuid"
+	"github.com/vlad19930514/webApp/internal/app/domain"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"github.com/vlad19930514/webApp/util"
 )
 
 type createUserRequest struct {
-	FirstName string json:"firstname" binding:"required,alpha"
-	LastName  string json:"lastname" binding:"required,alpha"
-	Email     string json:"email" binding:"required,email"
-	Age       int16  json:"age" binding:"required,min=1,max=130"
+	FirstName string `json:"firstname" binding:"required,alpha"`
+	LastName  string `json:"lastname" binding:"required,alpha"`
+	Email     string `json:"email" binding:"required,email"`
+	Age       uint8  `json:"age" binding:"required,min=1,max=130"`
 }
 
-func (server *Server) createUser(ctx *gin.Context) {
+func (server *HttpServer) createUser(ctx *gin.Context) {
 
 	var req createUserRequest
 
@@ -38,7 +39,7 @@ func (server *Server) createUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	user, err := server.services.userService.CreateUser(ctx, arg)
+	user, err := server.userService.CreateUser(ctx, arg)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
@@ -48,10 +49,10 @@ func (server *Server) createUser(ctx *gin.Context) {
 }
 
 type getUserRequest struct {
-	ID string uri:"id"  binding:"required,uuid"
+	ID string `uri:"id"  binding:"required,uuid"`
 }
 
-func (server *Server) getUser(ctx *gin.Context) {
+func (server *HttpServer) getUser(ctx *gin.Context) {
 	var req getUserRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		validationErrors, errorsExist := util.GetValidationErrors(&err)
@@ -66,7 +67,7 @@ func (server *Server) getUser(ctx *gin.Context) {
 
 	id, _ := uuid.Parse(req.ID)
 
-	user, err := server.services.userService.GetUser(ctx, id)
+	user, err := server.userService.GetUser(ctx, id)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, errorResponse(err))
 		return
@@ -75,14 +76,14 @@ func (server *Server) getUser(ctx *gin.Context) {
 }
 
 type updateUserRequest struct {
-	ID        string json:"id" binding:"required,uuid"
-	FirstName string json:"firstname" binding:"required,alpha"
-	LastName  string json:"lastname" binding:"required,alpha"
-	Email     string json:"email" binding:"required,email"
-	Age       int16  json:"age" binding:"required,min=1,max=130"
+	ID        uuid.UUID `json:"id" binding:"required,uuid"`
+	FirstName string    `json:"firstname" binding:"required,alpha"`
+	LastName  string    `json:"lastname" binding:"required,alpha"`
+	Email     string    `json:"email" binding:"required,email"`
+	Age       uint8     `json:"age" binding:"required,min=1,max=130"`
 }
 
-func (server *Server) updateUser(ctx *gin.Context) {
+func (server *HttpServer) updateUser(ctx *gin.Context) {
 	var req updateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 
@@ -95,11 +96,29 @@ func (server *Server) updateUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	domainUser, err := updateUserToDomain(req)
-	user, err := server.services.userService.UpdateUser(ctx, domainUser)
+	domainUser := domain.User{
+		Id:        req.ID,
+		FirstName: req.FirstName,
+		LastName:  req.LastName,
+		Email:     req.Email,
+		Age:       req.Age,
+	}
+
+	user, err := server.userService.UpdateUser(ctx, domainUser)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, user)
+}
+func toDomainUser(req createUserRequest) (domain.User, error) {
+	id := uuid.New()
+	user := domain.User{
+		Id:        id,
+		FirstName: req.FirstName,
+		LastName:  req.LastName,
+		Email:     req.Email,
+		Age:       req.Age,
+	}
+	return user, nil
 }

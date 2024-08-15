@@ -1,7 +1,6 @@
 package pg
 
 import (
-	"context"
 	"fmt"
 
 	"gorm.io/driver/postgres"
@@ -12,7 +11,7 @@ type DB struct {
 	*gorm.DB
 }
 
-func Dial(ctx context.Context, dsn string) (*DB, error) {
+func Dial(dsn string) (*DB, error) {
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

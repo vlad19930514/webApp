@@ -29,7 +29,7 @@ func (s *UserTestSuite) SetupTest() {
 	s.mCtrl = gomock.NewController(s.T())
 	s.mockUserService = mocks.NewMockIUserService(s.mCtrl)
 
-	server := NewServer(s.mockUserService)
+	server := NewHttpServer(s.mockUserService)
 	router := gin.Default()
 	router.POST("/user", server.createUser)
 	router.GET("/user/:id", server.getUser)
@@ -59,12 +59,12 @@ func (s *UserTestSuite) TestCreateUser() {
 				Age:       28,
 			},
 			mockReturnUser: domain.User{
-				ID:        uuid.New(),
+				Id:        uuid.New(),
 				FirstName: "Alice",
 				LastName:  "Johnson",
 				Email:     "alice.johnson@example.com",
 				Age:       28,
-				Created:   time.Now(),
+				CreatedAt: time.Now(),
 			},
 			mockReturnErr:  nil,
 			expectedStatus: http.StatusOK,
@@ -119,12 +119,12 @@ func (s *UserTestSuite) TestCreateUser() {
 				var createdUser domain.User
 				err := json.Unmarshal(w.Body.Bytes(), &createdUser)
 				assert.NoError(s.T(), err, "Expected no error when unmarshaling response body")
-				assert.Equal(s.T(), tt.mockReturnUser.ID, createdUser.ID, "Expected created user ID to match")
+				assert.Equal(s.T(), tt.mockReturnUser.Id, createdUser.Id, "Expected created user ID to match")
 				assert.Equal(s.T(), tt.mockReturnUser.FirstName, createdUser.FirstName, "Expected created user FirstName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.LastName, createdUser.LastName, "Expected created user LastName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.Email, createdUser.Email, "Expected created user Email to match")
 				assert.Equal(s.T(), tt.mockReturnUser.Age, createdUser.Age, "Expected created user Age to match")
-				assert.WithinDuration(s.T(), tt.mockReturnUser.Created, createdUser.Created, time.Second, "Expected created time to be within 1 second")
+				assert.WithinDuration(s.T(), tt.mockReturnUser.CreatedAt, createdUser.CreatedAt, time.Second, "Expected created time to be within 1 second")
 			}
 		})
 	}
@@ -142,12 +142,12 @@ func (s *UserTestSuite) TestGetUser() {
 			name:   "successful retrieval",
 			userID: uuid.New().String(),
 			mockReturnUser: domain.User{
-				ID:        uuid.New(),
+				Id:        uuid.New(),
 				FirstName: "John",
 				LastName:  "Doe",
 				Email:     "john.doe@example.com",
 				Age:       30,
-				Created:   time.Now(),
+				CreatedAt: time.Now(),
 			},
 			mockReturnErr:  nil,
 			expectedStatus: http.StatusAccepted,
@@ -190,12 +190,12 @@ func (s *UserTestSuite) TestGetUser() {
 				var retrievedUser domain.User
 				err := json.Unmarshal(w.Body.Bytes(), &retrievedUser)
 				assert.NoError(s.T(), err, "Expected no error when unmarshaling response body")
-				assert.Equal(s.T(), tt.mockReturnUser.ID, retrievedUser.ID, "Expected retrieved user ID to match")
+				assert.Equal(s.T(), tt.mockReturnUser.Id, retrievedUser.Id, "Expected retrieved user ID to match")
 				assert.Equal(s.T(), tt.mockReturnUser.FirstName, retrievedUser.FirstName, "Expected retrieved user FirstName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.LastName, retrievedUser.LastName, "Expected retrieved user LastName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.Email, retrievedUser.Email, "Expected retrieved user Email to match")
 				assert.Equal(s.T(), tt.mockReturnUser.Age, retrievedUser.Age, "Expected retrieved user Age to match")
-				assert.WithinDuration(s.T(), tt.mockReturnUser.Created, retrievedUser.Created, time.Second, "Expected created time to be within 1 second")
+				assert.WithinDuration(s.T(), tt.mockReturnUser.CreatedAt, retrievedUser.CreatedAt, time.Second, "Expected created time to be within 1 second")
 			}
 		})
 	}
@@ -212,19 +212,19 @@ func (s *UserTestSuite) TestUpdateUser() {
 		{
 			name: "successful update",
 			input: updateUserRequest{
-				ID:        uuid.New().String(),
+				ID:        uuid.New(),
 				FirstName: "Alice",
 				LastName:  "Johnson",
 				Email:     "alice.johnson@example.com",
 				Age:       28,
 			},
 			mockReturnUser: domain.User{
-				ID:        uuid.New(),
+				Id:        uuid.New(),
 				FirstName: "Alice",
 				LastName:  "Johnson",
 				Email:     "alice.johnson@example.com",
 				Age:       28,
-				Created:   time.Now(),
+				CreatedAt: time.Now(),
 			},
 			mockReturnErr:  nil,
 			expectedStatus: http.StatusOK,
@@ -233,7 +233,7 @@ func (s *UserTestSuite) TestUpdateUser() {
 		{
 			name: "validation error - invalid email",
 			input: updateUserRequest{
-				ID:        uuid.New().String(),
+				ID:        uuid.New(),
 				FirstName: "John",
 				LastName:  "Doe",
 				Email:     "john.doe",
@@ -247,7 +247,7 @@ func (s *UserTestSuite) TestUpdateUser() {
 		{
 			name: "server error",
 			input: updateUserRequest{
-				ID:        uuid.New().String(),
+				ID:        uuid.New(),
 				FirstName: "Jane",
 				LastName:  "Smith",
 				Email:     "jane.smith@example.com",
@@ -281,7 +281,7 @@ func (s *UserTestSuite) TestUpdateUser() {
 				var updatedUser domain.User
 				err := json.Unmarshal(w.Body.Bytes(), &updatedUser)
 				assert.NoError(s.T(), err, "Expected no error when unmarshaling response body")
-				assert.Equal(s.T(), tt.mockReturnUser.ID, updatedUser.ID, "Expected updated user ID to match")
+				assert.Equal(s.T(), tt.mockReturnUser.Id, updatedUser.Id, "Expected updated user ID to match")
 				assert.Equal(s.T(), tt.mockReturnUser.FirstName, updatedUser.FirstName, "Expected updated user FirstName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.LastName, updatedUser.LastName, "Expected updated user LastName to match")
 				assert.Equal(s.T(), tt.mockReturnUser.Email, updatedUser.Email, "Expected updated user Email to match")

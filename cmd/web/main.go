@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/rs/zerolog"
@@ -35,24 +34,26 @@ func runApplication() error {
 		return fmt.Errorf("cannot load config: %w", err)
 	}
 
-	pgDB, err := pg.Dial(context.Background(), config.DSN)
+	pgDB, err := pg.Dial(config.DSN)
 
 	if err != nil {
 		return fmt.Errorf("error creating connection pool: %w", err)
 	}
 
 	// create repositories
-	userRepo := pgrepo.NewUserRepo(pgDB)
-
+	userRepo, err := pgrepo.NewUserRepo(pgDB)
+	if err != nil {
+		return fmt.Errorf("failed to create userRepo: %w", err)
+	}
 	// create services
 	userService := services.NewUserService(userRepo)
 	//run migration
-	err = runDBMigration(config.MigrationURL, config.DBSource)
+	/*err = runDBMigration(config.MigrationURL, config.DBSource)
 	if err != nil {
 		return fmt.Errorf("cannot migrate: %w", err)
-	}
+	}*/
 
-	server := httpserver.NewServer(userService)
+	server := httpserver.NewHttpServer(userService)
 
 	err = server.Start(config.ServerAddress)
 	if err != nil {

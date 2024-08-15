@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9ffe3f2-d357-4463-ae11-2906e63158c4" name="Changes" comment="test user handler">
-      <change afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers_test.go" afterDir="false" />
+    <list default="true" id="b9ffe3f2-d357-4463-ae11-2906e63158c4" name="Changes" comment="test user">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/domain/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/migrations/000001_add_users.down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/repository/pgrepo/user_repo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/repository/pgrepo/utils" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/services/interfaces.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/services/user_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/web/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/web/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/transport/httpserver/interfaces.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/interfaces.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/transport/httpserver/users_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/pg/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/pg/pg.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +62,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
     "Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1).executor": "Run",
     "Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
     "Go Test.TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver.executor": "Run",
@@ -75,17 +87,27 @@
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
     "typescript.add.unambiguous.imports.on.the.fly": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/internal/app/transport/httpserver" />
+      <recent name="$PROJECT_DIR$/internal/app/services" />
+      <recent name="$PROJECT_DIR$/internal/app/domain" />
+      <recent name="$PROJECT_DIR$/internal/app/repository/pgrepo" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/app/migrations" />
       <recent name="$PROJECT_DIR$/internal/app/transport/httpserver/mockery" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)">
+  <component name="RunManager" selected="Makefile Target.nodemon">
     <configuration name="TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="respApp" />
       <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
@@ -111,18 +133,6 @@
       <pattern value="^\QTestCreateUser\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="respApp" />
-      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestCreateUser\E$/^\Qsuccessful_create_user\E$" />
-      <method v="2" />
-    </configuration>
     <configuration name="TestRun in github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="respApp" />
       <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
@@ -135,24 +145,25 @@
       <pattern value="^\QTestRun\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="go test github.com/vlad19930514/webApp/internal/app/transport/httpserver" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="respApp" />
-      <working_directory value="$PROJECT_DIR$/internal/app/transport/httpserver" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
+    <configuration name="migratedown" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="migratedown" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="nodemon" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="nodemon" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile Target.nodemon" />
+        <item itemvalue="Makefile Target.migratedown" />
+        <item itemvalue="Makefile Target.nodemon" />
         <item itemvalue="Go Test.TestRun in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
         <item itemvalue="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver (1)" />
-        <item itemvalue="Go Test.TestCreateUser in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
-        <item itemvalue="Go Test.TestCreateUser/successful_create_user in github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
-        <item itemvalue="Go Test.go test github.com/vlad19930514/webApp/internal/app/transport/httpserver" />
       </list>
     </recent_temporary>
   </component>
@@ -169,11 +180,43 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -183,7 +226,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="complete rest" />
     <MESSAGE value="test user handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="test user handler" />
+    <MESSAGE value="test user" />
+    <option name="LAST_COMMIT_MESSAGE" value="test user" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
